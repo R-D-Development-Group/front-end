@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
       }
 
       let i = 1;
-      let fetchedLists: TaskList[] = [];
+      const fetchedLists: TaskList[] = [];
 
       while (true) {
         try {

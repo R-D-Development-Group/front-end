@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { MailOpen, Loader2, KeyRound } from "lucide-react";
+import { Loader2, KeyRound } from "lucide-react";
 import { motion } from "framer-motion";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { useAuth } from "@/context/AuthContext";
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
       login(token);
       setFadeOut(true);
       setTimeout(() => navigate("/dashboard"), 500);
-    } catch (error) {
+    } catch {
       setErrorMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
       className="flex items-center justify-center w-screen h-screen"
     >
       <div className="relative w-full h-full flex items-center justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] overflow-hidden">
-        <Spotlight className="absolute inset-0 w-full h-full" />
+        <Spotlight />
 
         <div className="relative z-10 flex flex-col items-center">
           <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">

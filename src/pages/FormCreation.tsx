@@ -38,7 +38,7 @@ const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
           setFormName(data.name);
           setFields(data.tasks);
         } catch (error) {
-          setMessage({ text: error.message, type: "error" });
+          setMessage({ text: (error as Error).message, type: "error" });
         }
       })();
     }
@@ -65,10 +65,9 @@ const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
 
       if (!response.ok) throw new Error("Failed to submit form. Please try again.");
 
-      setMessage({ text: "Form submitted successfully!", type: "success" });
-      setTimeout(() => navigate("/dashboard"), 500);
+      navigate("/dashboard");
     } catch (error) {
-      setMessage({ text: error.message, type: "error" });
+      setMessage({ text: (error as Error).message, type: "error" });
     }
   };
 
@@ -83,7 +82,7 @@ const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
         {/* Back Button */}
         <Button 
           variant="outline" 
-          onClick={() => navigate(mode === "view" ? -1 : "/dashboard")} 
+          onClick={() => navigate("/dashboard")} 
           className="mb-4 border-gray-700 hover:bg-gray-700"
         >
           <ArrowLeft className="h-4 w-4 mr-1" /> {mode === "view" ? "Back" : "Return to Dashboard"}

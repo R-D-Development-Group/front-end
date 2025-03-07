@@ -1,54 +1,61 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React frontend built with TypeScript and Vite. It provides a fast development experience with HMR (Hot Module Replacement) and ESLint configurations.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these steps to set up and run the project locally.
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js) or [pnpm](https://pnpm.io/) if you prefer
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Clone the repository:
+   ```sh
+   git clone <repo-url>
+   cd <repo-folder>
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Running the Development Server
+
+To start the local development server, run:
+   ```sh
+   npm run dev
+   ```
+This will start the app and serve it on `http://localhost:5173/` (or another available port if 5173 is in use).
+
+### Building for Production
+
+To create an optimized production build:
+   ```sh
+   npm run build
+   ```
+The build output will be generated in the `dist/` folder.
+
+### Linting & Formatting
+
+To run ESLint and check for linting issues:
+   ```sh
+   npm run lint
+   ```
+
+## Additional Notes
+
+This project uses the following official Vite plugins:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+For expanding ESLint configurations, refer to the [Vite ESLint guide](https://vitejs.dev/guide/).
+
+---
+
+Let me know if you need any modifications! 🚀

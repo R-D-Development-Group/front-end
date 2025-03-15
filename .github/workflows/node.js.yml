@@ -17,7 +17,6 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-#                      [20.x, 22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -32,33 +31,20 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v6
-      with:
-        image: ${{ secrets.DOCKER_USERNAME }}/rd_dev_frontend
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v2
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-    - name: Configure Docker to use Google Artifact Registry
-      run: gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - name: Install GCLI
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID}}
 
-    - name: Push Docker image to Google Artifact Registry
+    - name: Build & push Docker Image
+      env:
+        GOOGLE_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
       run: |
-        docker tag ${{ secrets.DOCKER_USERNAME }}/rd_dev_frontend:latest europe-west1-docker.pkg.dev/devopsrd/rd-frontend-docker-repo/docker-gcloud-image:latest
+        gcloud auth configure-docker europe-west1-docker.pkg.dev
+        docker build -t europe-west1-docker.pkg.dev/devopsrd/rd-frontend-docker-repo/docker-gcloud-image:latest .
         docker push europe-west1-docker.pkg.dev/devopsrd/rd-frontend-docker-repo/docker-gcloud-image:latest
-
-#    - name: Deploy to Cloud Run (IDK how much money this will cost so commented out for now)
-#      run: |
-#        gcloud run deploy my-app \
-#          --image=europe-west1-docker.pkg.dev/devopsrd/rd-frontend-docker-repo/docker-gcloud-image:latest \
-#          --region=europe-west1 \
-#          --platform=managed \
-#          --allow-unauthenticated

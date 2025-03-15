@@ -9,7 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 const loginUrl = "http://localhost:8080/realms/internal/protocol/openid-connect/token";
 
 const loginRequest = async (): Promise<string> => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 0));
 
   const response = await fetch(loginUrl, {
     method: "POST",

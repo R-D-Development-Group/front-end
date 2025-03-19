@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { useAuth } from "@/context/AuthContext";
 
-const loginUrl = "http://localhost:8080/realms/internal/protocol/openid-connect/token";
+const loginUrl = import.meta.env.VITE_LOGIN_URL || "http://localhost:8080/realms/internal/protocol/openid-connect/token";
 
 const loginRequest = async (): Promise<string> => {
   await new Promise(resolve => setTimeout(resolve, 0));

@@ -15,6 +15,8 @@ interface FormCreationProps {
   mode: "create" | "view"; // Mode determines behavior
 }
 
+let API_URL = import.meta.env.VITE_API_URL || "http://localhost:8082"
+
 const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
   const [fields, setFields] = useState<FormField[]>([]);
   const [formName, setFormName] = useState("");
@@ -28,7 +30,7 @@ const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
     if (mode === "view" && id) {
       (async () => {
         try {
-          const response = await fetch(`/api/task-list/${id}`, {
+          const response = await fetch(`${API_URL}/api/task-list/${id}`, {
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           });
 
@@ -57,7 +59,7 @@ const FormCreation: React.FC<FormCreationProps> = ({ mode }) => {
     if (!token) return setMessage({ text: "Authentication failed. Please log in again.", type: "error" });
 
     try {
-      const response = await fetch("/api/task-list", {
+      const response = await fetch(`${API_URL}/api/task-list`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ name: formName, tasks: fields }),

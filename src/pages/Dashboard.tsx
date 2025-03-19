@@ -14,6 +14,8 @@ interface TaskList {
 const CACHE_KEY = "taskListsCache";
 const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 minutes
 
+let API_URL = import.meta.env.VITE_API_URL || "http://localhost:8082"
+
 const Dashboard: React.FC = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const Dashboard: React.FC = () => {
 
       while (true) {
         try {
-          const response = await fetch(`/api/task-list/${i}`, {
+          const response = await fetch(`${API_URL}/api/task-list/${i}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

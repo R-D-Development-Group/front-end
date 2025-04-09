@@ -56,6 +56,6 @@ This project uses the following official Vite plugins:
 
 For expanding ESLint configurations, refer to the [Vite ESLint guide](https://vitejs.dev/guide/).
 
----
-
-Let me know if you need any modifications! 🚀
+## Copyright
+Authors: Vakaris Paulavicius, Tabish Nanhekhan, Jashvant Sewmangal, Julian Warner 
+2025 | University of Amsterdam
